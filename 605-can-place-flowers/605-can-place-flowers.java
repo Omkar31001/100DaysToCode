@@ -8,9 +8,9 @@ class Solution {
             int nxt=(i==k-1 || flo[i+1]==0)?0:1;
             if(prev==0 && nxt==0 && flo[i]==0){
                 flo[i]=1;
-                n--;
+                count++;
             }
         }
-       return n<=0;
+       return count>=n;
     }
 }
