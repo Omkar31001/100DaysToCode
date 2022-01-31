@@ -5,7 +5,7 @@ class Solution {
         while(start<=end){
             int mid  = start+ (end-start)/2;
             if(arr[mid+1]>arr[mid]){
-                start = mid+1;
+                start = mid;
             }else if(arr[mid-1]>arr[mid]){
                 end = mid;
             }else if((arr[mid]>arr[mid-1]) && (arr[mid]>arr[mid+1])){
