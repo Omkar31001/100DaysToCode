@@ -9,42 +9,49 @@
  * }
  */
 class Solution {
-    public boolean isPalindrome(ListNode head) {
-        if(head == null) return true;
-     
-     ListNode firstHalfEnd = endOfFirstHalf(head);
-     ListNode secondHalfStart = reverseList(firstHalfEnd.next);
-     ListNode p1 = head;
-     while(secondHalfStart!=null){
-         if(p1.val != secondHalfStart.val){
-             return false;
-         }
-         p1 = p1.next;
-         secondHalfStart = secondHalfStart.next;
-     }
-    
-  return true;
-    }
-    private ListNode endOfFirstHalf(ListNode head){
-        ListNode slow = head;
-        ListNode fast = head;
-        
-        while(fast.next != null && fast.next.next !=null){
-            slow = slow.next;
-            fast = fast.next.next;
+     public ListNode middleNode(ListNode head) {
+        ListNode s = head;
+        ListNode f = head;
+
+        while (f != null && f.next != null) {
+            s = s.next;
+            f = f.next.next;
         }
-        return slow;
+        return s;
     }
-    private ListNode reverseList(ListNode head){
-       
+    public ListNode reverse(ListNode head) {
+        if (head == null) {
+            return head;
+        }
         ListNode prev = null;
-        ListNode curr = head;
-        while(curr != null){
-            ListNode next = curr.next;
-            curr.next = prev;
-            prev = curr;
-            curr = next;
+        ListNode present = head;
+        ListNode next = present.next;
+
+        while (present != null) {
+            present.next = prev;
+            prev = present;
+            present = next;
+            if (next != null) {
+                next = next.next;
+            }
         }
-    return prev;
+        return prev;
+    }
+
+    public boolean isPalindrome(ListNode head) {
+        ListNode mid = middleNode(head);
+        ListNode headSecond = reverse(mid);
+        ListNode rereverseHead = headSecond;
+
+        // compare both the halves
+        while (head != null && headSecond != null) {
+            if (head.val != headSecond.val) {
+                return false;
+            }
+            head = head.next;
+            headSecond = headSecond.next;
+        }
+      return true;
+        
     }
 }
